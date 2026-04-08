@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<CardService>();
+builder.Services.AddSingleton<MusicService>();
 
 // ── CORS (permite o frontend se conectar) ─────────────
 builder.Services.AddCors(options =>
@@ -97,6 +98,47 @@ app.MapDelete("/api/cards/{id:guid}", (Guid id, CardService svc) =>
 })
 .WithName("DeleteCard")
 .WithTags("Cards");
+
+// Gets MusicService
+app.MapGet("/api/artists", (MusicService ms) =>
+{
+    return Results.Ok(ms.GetArtists());
+})
+.WithName("GetAllArtists")
+.WithTags("Musics");
+
+app.MapGet("/api/artists/musics", (MusicService ms) =>
+{
+    return Results.Ok(ms.GetAllMusicsWithArtists());
+})
+.WithName("GetAllMusics")
+.WithTags("Musics");
+
+app.MapGet("/api/artists/music/{musicId:guid}", (Guid musicId, MusicService ms) =>
+{
+    return Results.Ok(ms.GetMusicById(musicId));
+})
+.WithName("GetMusicById")
+.WithTags("Musics");
+
+// Put Music MusicService
+
+app.MapPut("/api/artists/music", (Music music, MusicService ms) =>
+{
+    var musicUpdated = ms.UpdateMusicForAllArtists(music);
+    return musicUpdated is true ? Results.Ok(ms.GetMusicById(music.Id)) : Results.NotFound();
+})
+.WithName("UpdateMusic")
+.WithTags("Musics");
+
+// Post MusicService
+app.MapPost("/api/artists/{artistId:guid}/music", (Guid artistId, Music music, MusicService ms) =>
+{
+    var created = ms.AddSongToArtist(artistId, music);
+    return Results.Created($"/api/artists/{artistId}/music/{created?.Id}", created);
+})
+.WithName("CreateMusic")
+.WithTags("Musics");
 
 app.Run();
 
