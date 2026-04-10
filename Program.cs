@@ -107,6 +107,25 @@ app.MapGet("/api/artists", (MusicService ms) =>
 .WithName("GetAllArtists")
 .WithTags("Musics");
 
+app.MapGet("/api/artists/{artistId:guid}", (Guid artistId, MusicService ms) =>
+{
+    return Results.Ok(ms.GetArtistById(artistId));
+})
+.WithName("GetArtist")
+.WithTags("Musics");
+
+
+// Post artist
+app.MapPost("/api/artists", (Artist artist, MusicService ms) =>
+{
+
+    var created = ms.AddArtist(artist);
+    return Results.Created($"/api/artists/{created?.Id}", created);
+})
+.WithName("AddArtist")
+.WithTags("Musics");
+
+// Get Music MusicService
 app.MapGet("/api/artists/musics", (MusicService ms) =>
 {
     return Results.Ok(ms.GetAllMusicsWithArtists());
@@ -116,7 +135,8 @@ app.MapGet("/api/artists/musics", (MusicService ms) =>
 
 app.MapGet("/api/artists/music/{musicId:guid}", (Guid musicId, MusicService ms) =>
 {
-    return Results.Ok(ms.GetMusicById(musicId));
+    var music = ms.GetMusicById(musicId);
+    return music is not null ? Results.Ok(music) : Results.NotFound();
 })
 .WithName("GetMusicById")
 .WithTags("Musics");
@@ -134,10 +154,36 @@ app.MapPut("/api/artists/music", (Music music, MusicService ms) =>
 // Post MusicService
 app.MapPost("/api/artists/{artistId:guid}/music", (Guid artistId, Music music, MusicService ms) =>
 {
-    var created = ms.AddSongToArtist(artistId, music);
-    return Results.Created($"/api/artists/{artistId}/music/{created?.Id}", created);
+    //var created = ms.AddSongToArtist(artistId, music);
+    var ( success, message, musica) = ms.AddSongToArtist(artistId, music);
+    if (!success)
+    {
+        // Pega a mensagem que veio do Service e joga no BadRequest
+        return Results.BadRequest(new { aviso = message });
+    }
+
+    return Results.Ok(new { mensagem = message, dados = musica });
+    //return Results.Created($"/api/artists/music/{created?.Id}", created);
 })
 .WithName("CreateMusic")
+.WithTags("Musics");
+
+// Delete Artist
+
+app.MapDelete("/api/artists/{artistId:guid}", (Guid artistId, MusicService ms) =>
+{
+    return ms.DeleteArtist(artistId) ? Results.NoContent() : Results.NotFound();
+})
+.WithName("DeleteArtist")
+.WithTags("Musics");
+
+// Delete Music
+
+app.MapDelete("/api/artists/music/{musicId:guid}", (Guid musicId, MusicService ms) =>
+{
+    return ms.DeleteMusic(musicId) ? Results.NoContent() : Results.NotFound();
+})
+.WithName("DeleteMusic")
 .WithTags("Musics");
 
 app.Run();
