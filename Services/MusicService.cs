@@ -91,6 +91,8 @@ public class MusicService
         return _artists;
     }*/
 
+    public Artist? GetArtistById(Guid id) => _artists.FirstOrDefault(c => c.Id == id);
+
     public Artist AddArtist(Artist artist)
     {
         artist.Id = Guid.NewGuid();
@@ -130,7 +132,7 @@ public class MusicService
     }
 
 
-    public Music? AddSongToArtist(Guid artistId, Music music)
+    public (bool success, string message, Music? music) AddSongToArtist(Guid artistId, Music music)
     {
         // se a musica tem id, recupera a entidade e so adiciona ao artista se a musca nao estiver na lista dele
         // se nao tem id, ai sim, gera um guid, adiciona todos os atributos da mudica, e so depois adiciona ao artista
@@ -140,9 +142,12 @@ public class MusicService
         if (!UpdateMusicForAllArtists(music))
             music.Id = Guid.NewGuid();
 
-        if (artist is null || artist.Musics.Any(p => p.Id == music.Id))
-            return null; // Artista não encontrado
+        if (artist is null)
+            return (false, "Artista não existe!", null);
+        //return null; // Artista não encontrado
 
+        if(artist.Musics.Any(p => p.Id == music.Id))
+            return (false, "Música atualizada, mas o Artista já possui a música.", null);
 
 
 
@@ -151,7 +156,8 @@ public class MusicService
         //music.ArtistId = artistId;
         artist.Musics.Add(music);
 
-        return music;
+        //return music;
+        return (true, "Música adicionada ao artista com sucesso!", music);
     }
 
     public object GetAllMusicsWithArtists()
@@ -223,5 +229,37 @@ public class MusicService
             .FirstOrDefault();
 
         return musicaEncontrada;
+    }
+
+    public bool DeleteArtist(Guid artistId)
+    {
+        var artist = _artists.FirstOrDefault(c => c.Id == artistId);
+        if (artist is null) return false;
+        _artists.Remove(artist);
+        return true;
+    }
+
+    public bool DeleteMusic(Guid musicId)
+    {
+        bool foiDeletadaDeAlguem = false;
+
+            // Percorre todos os artistas da lista principal
+            foreach (var artist in _artists)
+            {
+                // Se a lista de músicas for nula, pula para o próximo artista
+                if (artist.Musics == null) continue;
+
+                // O RemoveAll deleta todos os itens que batem com a condição e retorna a quantidade deletada
+                int quantidadeRemovida = artist.Musics.RemoveAll(m => m.Id == musicId);
+
+                // Se removeu de pelo menos um artista, marcamos como sucesso
+                if (quantidadeRemovida > 0)
+                {
+                    foiDeletadaDeAlguem = true;
+                }
+            }
+
+            // Retorna true se a música existia e foi deletada de pelo menos um artista, ou false se não foi encontrada em nenhum
+            return foiDeletadaDeAlguem;
     }
 }
