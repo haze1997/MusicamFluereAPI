@@ -1,28 +1,36 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// ── Serviços ──────────────────────────────────────────
+// Configurar a porta usando a variável de ambiente PORT do Render
+var port = Environment.GetEnvironmentVariable("PORT") ?? "80";
+builder.WebHost.UseUrls($"http://+:{port}");
+
+// Restante da configuração...
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<CardService>();
 builder.Services.AddSingleton<MusicService>();
 
-// ── CORS (permite o frontend se conectar) ─────────────
+// CORS - Permitir o frontend acessar o backend
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
         policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader()
+              .AllowAnyMethod();
     });
 });
 
 var app = builder.Build();
 
-// ── Middlewares ────────────────────────────────────────
+// Habilitar Swagger em todos os ambientes (útil para verificar se o deploy funcionou)
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseCors();
+
+app.UseCors("AllowAll");
+app.UseAuthorization();
+app.MapControllers();
 
 // ── Endpoints ─────────────────────────────────────────
 
