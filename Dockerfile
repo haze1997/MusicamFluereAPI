@@ -9,8 +9,11 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/publish .
 
-# O Render define a variável PORT automaticamente
+# Pega a variavél do Render ou se não tiver definida coloca como 80 por padrão
+ARG PORT=80
+ENV PORT=$PORT
+
 # O Program.cs já lê essa variável
-EXPOSE 80
+EXPOSE $PORT
 
 ENTRYPOINT ["dotnet", "MusicamFluereAPI.dll"]

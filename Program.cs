@@ -159,6 +159,32 @@ app.MapPut("/api/artists/music", (Music music, MusicService ms) =>
 .WithName("UpdateMusic")
 .WithTags("Musics");
 
+// PATCH /api/artists/music/{id:guid}/move → Move a música para outro gênero (Genre)
+app.MapPatch("/api/artists/music/{id:guid}/move", (Guid id, MoveMusicRequest request, MusicService ms) =>
+{
+    // Gêneros válidos permitidos no frontend
+    string[] validGenres = { "Rock", "Pop", "Reggae", "Eletronica", "Rap" };
+
+    // Verifica se o gênero enviado é válido, evitando dados indesejados
+    if (!validGenres.Contains(request.Genre, StringComparer.OrdinalIgnoreCase))
+    {
+        return Results.BadRequest(new
+        {
+            error = "Gênero inválido",
+            validGenres
+        });
+    }
+
+    // Chama a função do Service para atualizar o gênero nas referências
+    var success = ms.UpdateMusicGenre(id, request.Genre);
+    return success ? Results.Ok(new { message = "Gênero atualizado com sucesso" }) : Results.NotFound();
+})
+.WithName("MoveMusic")
+.WithTags("Musics");
+
+
+
+
 // Post MusicService
 app.MapPost("/api/artists/{artistId:guid}/music", (Guid artistId, Music music, MusicService ms) =>
 {
@@ -199,3 +225,5 @@ app.Run();
 // ── Records auxiliares ────────────────────────────────
 // Record usado para receber o novo status no endpoint de mover card
 public record MoveRequest(string Status);
+// Record auxiliar para receber o body (o novo Genre)
+public record MoveMusicRequest(string Genre);

@@ -231,6 +231,33 @@ public class MusicService
         return musicaEncontrada;
     }
 
+    public bool UpdateMusicGenre(Guid musicId, string newGenre)
+    {
+        // 1. Achata as listas e filtra para encontrar todas as referências da música nos artistas
+        var musicsToUpdate = _artists
+            .SelectMany(a => a.Musics)
+            .Where(m => m.Id == musicId)
+            .ToList();
+
+        // Se a lista estiver vazia, a música não pertence a ninguém (ou não existe)
+        if (!musicsToUpdate.Any())
+        {
+            return false;
+        }
+
+        // 2. Percorre as cópias da música encontradas
+        foreach (var music in musicsToUpdate)
+        {
+            // Altera para o novo Gênero recebido do drag and drop
+            music.Genre = newGenre;
+            // Atualiza a data de modificação
+            music.UpdatedAt = DateTime.Now;
+        }
+
+        return true; // Atualização concluída com sucesso
+    }
+
+
     public bool DeleteArtist(Guid artistId)
     {
         var artist = _artists.FirstOrDefault(c => c.Id == artistId);
