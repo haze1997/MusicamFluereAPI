@@ -19,7 +19,7 @@ public class MusicService
             {
                 Id = Guid.NewGuid(),
                 Name = "Jhon Lennon",
-                UrlImage = "image_do_jhon_lennon"
+                UrlImage = "https://akamai.sscdn.co/uploadfile/letras/fotos/d/4/d/1/d4d1305596424132afc895f590e39d97-tb4.jpg"
             },
             new()
             {
@@ -67,13 +67,243 @@ public class MusicService
             {
                 Id = Guid.NewGuid(),
                 Name = "Metallica",
-                UrlImage = "image_do_metallica"
+                UrlImage = "https://akamai.sscdn.co/uploadfile/letras/fotos/3/7/7/6/37761eb939e030b0d4cf2248284a4d44-tb4.jpg"
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Name = "Matt Simons",
-                UrlImage = "image_do_matt_simons"
+                UrlImage = "https://akamai.sscdn.co/uploadfile/letras/fotos/7/d/9/3/7d93e048e2a3e84963269ab3222b1a96-tb4.jpg",
+                Musics = new List<Music>{
+                    new()
+                    {
+                        Id = Guid.NewGuid(),
+                        Title = "Catch And Release",
+                        Lyrics = """
+                        There's a place I go to
+                        Where no one knows me
+                        It's not lonely
+                        It's a necessary thing
+
+                        It's a place I made up
+                        Find out what I'm made of
+                        The nights I've stayed up
+                        Counting stars and fighting sleep
+
+                        Let it wash over me
+                        Ready to lose my feet
+                        Take me on to the place
+                        Where one reveals life's mistery
+
+                        Steady on down the line
+                        Lose every sense of time
+                        Take it all in
+                        And wake up that small part of me
+
+                        Day to day I'm blind to see
+                        And find how far to go
+
+                        Everybody got their reason
+                        Everybody got their way
+                        We're just catching and releasing
+                        What builds up throughout the day
+
+                        It gets into your body
+                        And it flows right through your blood
+                        We can tell eachother secrets
+                        And remember how to love
+
+                        There's a place I'm going
+                        No one knows me
+                        If I breathe real slowly
+                        Let it out and let it in
+
+                        They can be terrifying
+                        To be slowly dying
+                        Also clarifying
+                        The end where we begin
+
+                        So let it wash over me
+                        I'm ready to lose my feet
+                        Take me on to the place
+                        Where one reviews life's mistery
+
+                        Steady on down the line
+                        Lose every sense of time
+                        Take it all in
+                        And wake up that small part of me
+
+                        Day to day I'm blind to see
+                        And find how far to go
+
+                        Everybody got their reason
+                        Everybody got their way
+                        We're just catching and releasing
+                        What builds up throughout the day
+
+                        It gets into your body
+                        And it flows right through your blood
+                        We can tell eachother secrets
+                        And remember how to love
+
+                        Everybody got their reason
+                        Everybody got their way
+                        We're just catching and releasing
+                        What builds up throughout the day
+
+                        And it gets into your body
+                        And it flows right through your blood
+                        We can tell eachother secrets
+                        And remeber how to love
+                        """,
+                        LinkYoutube = "https://www.youtube.com/watch?v=1LXsm9y-z3I",
+                        Genre = "Eletronica",
+                        Cover  = false,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now
+                    }
+                }
+            },
+            new()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Jessé",
+                UrlImage = "https://akamai.sscdn.co/letras/115x115/fotos/6/2/1/8/6218854b451b89d361af2c57c9e19dac.jpg",
+                Musics = new List<Music>{
+                    new()
+                    {
+                        Id = Guid.NewGuid(),
+                        Title = "Asas - Maskavo",
+                        Lyrics = """
+                        Alalauê!
+                        Alalauê! Ê! Ê! Ê!
+                        Alalauê!
+                        Alalauê! Ê! Ê! Ê!
+
+                        Cê parece um anjo
+                        Só que não tem asas iaiá
+                        Oh meu Deus!
+                        Quando asas tiver
+                        Passe lá em casa
+
+                        Cê parece um anjo
+                        Só que não tem asas iaiá
+                        Oh meu Deus!
+                        Quando asas tiver
+                        Passe lá em casa
+
+                        E ao sair
+                        Pras estrelas
+                        Eu vou te levar
+                        Com a ajuda da brisa do mar
+                        Te mostrar onde ir
+
+                        E ao chegar
+                        Apresento-lhe a lua e o Sol
+                        E no céu vai ter mais um farol
+                        Que é a luz do teu olhar
+
+                        Eu não sou moleque
+                        Ainda não tenho casa iaiá
+                        Oh meu Deus!
+                        Se um dia eu tiver
+                        Visto minhas asas
+
+                        Eu não sou moleque
+                        Eu não!
+                        Ainda não tenho casa iaiá
+                        Oh meu Deus!
+                        Se um dia eu tiver
+                        Visto minhas asas
+
+                        E ao sair
+                        Pras estrelas
+                        Eu vou te levar
+                        Com a ajuda da brisa do mar
+                        Te mostrar onde ir
+
+                        E ao chegar
+                        Apresento-lhe a lua e o Sol
+                        E no céu vai ter mais um farol
+                        Que é a luz do teu olhar
+
+                        Cê parece um anjo
+                        Só que não tem asas iaiá
+                        Oh meu Deus!
+                        Quando asas tiver
+                        Passe lá em casa
+
+                        Cê parece um anjo
+                        Só que não tem asas iaiá
+                        Oh meu Deus!
+                        Quando asas tiver
+                        Passe lá em casa
+
+                        E ao sair
+                        Pras estrelas
+                        Eu vou te levar
+                        Com a ajuda da brisa do mar
+                        Te mostrar onde ir
+
+                        E ao chegar
+                        Apresento-lhe a lua e o Sol
+                        E no céu vai ter mais um farol
+                        Que é a luz do teu olhar
+
+                        Alalauê!
+                        Alalauê! Ê! Ê! Ê!
+                        Alalauê!
+                        Alalauê! Ê! Ê! Ê!
+
+                        Alalauê!
+                        Alalauê! Ê! Ê! Ê!
+                        Alalauê!
+                        Alalauê! Ê! Ê! Ê!
+
+                        Oh Lalauê! (Oh Lalauê!)
+                        Oh Lalauê! Ê! Ê! Ê!
+                        Oh Lalauê! (Oh Lalauê!)
+                        Oh Lalauê! Ê! Ê! Ê!
+                        """,
+                        LinkYoutube = "https://www.youtube.com/watch?v=YETq_Zrar_g",
+                        Genre = "Reggae",
+                        Cover  = true,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now
+                    },
+                    new()
+                    {
+                        Id = Guid.NewGuid(),
+                        Title = "Curtindo A Night",
+                        Lyrics = """
+                        Tava na night, só curtindo o flow
+                        Só de boa no ritmo dos beats
+                        Quando avisto a mina que também tava no fluxo
+                        Ela tá dançando e olhando pra mim
+
+                        Será que ela tem algum interesse em mim?
+                        Será que ela vai aceitar sair comigo?
+                        O que é que eu posso oferecer?
+                        O que é que eu faço para ela me querer?
+
+                        Se eu mostro o meu Porsche com certeza ela vem
+                        Quero ver ela sair comigo de Hyundai
+                        Muitos podem dizer que não tem nada a ver
+                        Mas eu quero ver na hora de escolher
+                        """,
+                        LinkYoutube = "https://www.youtube.com/watch?v=tjOs5ctjMnM",
+                        Genre = "Reggae",
+                        Cover = false,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now
+                    }
+                }
+            },
+            new()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Maskavo",
+                UrlImage = "https://akamai.sscdn.co/letras/115x115/fotos/2/0/f/1/20f129e6d33dc93ccb9875d3a48d8295.jpg"
             }
         });
     }
