@@ -122,6 +122,23 @@ app.MapGet("/api/artists/{artistId:guid}", (Guid artistId, MusicService ms) =>
 .WithName("GetArtist")
 .WithTags("Musics");
 
+// Put artist
+
+// Atualiza um artista existente
+app.MapPut("/api/artists/{id:guid}", (Guid id, Artist updatedArtist, MusicService ms) =>
+{
+    // Opcional: Garantir que o ID da rota bate com o ID do objeto enviado no corpo da requisição
+    if (id != updatedArtist.Id)
+    {
+        return Results.BadRequest(new { error = "O ID da rota não corresponde ao ID do artista." });
+    }
+
+    var artist = ms.UpdateArtist(id, updatedArtist);
+
+    return artist is not null ? Results.Ok(artist) : Results.NotFound();
+})
+.WithName("UpdateArtist")
+.WithTags("Musics");
 
 // Post artist
 app.MapPost("/api/artists", (Artist artist, MusicService ms) =>
