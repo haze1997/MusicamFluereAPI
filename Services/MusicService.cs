@@ -330,6 +330,25 @@ public class MusicService
         return artist;
     }
 
+    public Artist? UpdateArtist(Guid id, Artist updatedArtist)
+    {
+        var artist = _artists.FirstOrDefault(a => a.Id == id);
+
+        if (artist is null)
+        {
+            return null; // Retorna null se o artista não existir
+        }
+
+        // Atualiza as propriedades do artista
+        artist.Name = updatedArtist.Name;
+        artist.UrlImage = updatedArtist.UrlImage;
+
+        // Nota: A lista de músicas (Musics) geralmente não é sobrescrita
+        // diretamente aqui para evitar perda acidental de dados.
+
+        return artist;
+    }
+
     public bool UpdateMusicForAllArtists(Music updatedMusic)
     {
         // 1. Usa o SelectMany para achatar as listas e o Where para filtrar
