@@ -6,11 +6,13 @@ O **MusicamFluereAPI** é o motor backend robusto que alimenta a plataforma Musi
 ## Funcionalidades (Endpoints de Músicas)
 O projeto é uma Minimal API feita utilizando o framework .NET 8 para expor os recursos sob a tag **"Musics"** (que pode ser vista no Swagger) servindo como backend para o MusicamFluere. Abaixo estão os endpoints da **MusicamFluereAPI**:
 
-- **`GET /musics`**: Lista todas as músicas cadastradas no banco de dados.
-- **`GET /musics/{id}`**: Busca os detalhes específicos de uma única música através do seu identificador único.
-- **`POST /musics`**: Realiza o cadastro de uma nova música, recebendo dados como título, letra, link do YouTube e associações.
-- **`PUT /musics/{id}`**: Permite a atualização completa dos dados de uma música existente.
-- **`DELETE /musics/{id}`**: Remove uma música permanentemente do catálogo.
+- **`GET /api/artists/musics`**: Lista todas os artistas com suas respectivas músicas cadastradas no banco de dados.
+- **`GET /api/artists/music/{musicId:guid}`**: Busca os detalhes específicos de uma única música através do seu identificador único.
+- **`POST /api/artists/{artistId:guid}/music`**: Realiza o cadastro de uma nova música ou atualiza uma existente, recebendo dados como título, letra e link do YouTube com o Id do artista ao qual ela será associada.
+- **`PUT /api/artists/music`**: Permite a atualização completa dos dados de uma música existente sem alterar os artistas associados.
+- **`PATCH /api/artists/music/{id:guid}/move`**: Move uma música para outro gênero (Genre).
+- **`DELETE /api/artists/{artistId:guid}`**: Remove um artista com suas respectivas músicas permanentemente do catálogo.
+- **`DELETE /api/artists/music/{musicId:guid}`**: Remove uma música permanentemente do catálogo.
 
 ## Tecnologias Utilizadas
 - **Plataforma:** .NET 8 (LTS)
