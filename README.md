@@ -6,12 +6,16 @@ O **MusicamFluereAPI** é o motor backend robusto que alimenta a plataforma Musi
 ## Funcionalidades (Endpoints de Músicas)
 O projeto é uma Minimal API feita utilizando o framework .NET 8 para expor os recursos sob a tag **"Musics"** (que pode ser vista no Swagger) servindo como backend para o MusicamFluere. Abaixo estão os endpoints da **MusicamFluereAPI**:
 
-- **`GET /api/artists/musics`**: Lista todas os artistas com suas respectivas músicas cadastradas no banco de dados.
+- **`GET /api/artists`**: Lista todos os artistas cadastrados na memoria com suas respectivas músicas.
+- **`GET /api/artists/{artistId:guid}`**: Retorna um artista em específico com suas respectivas músicas.
+- **`PUT /api/artists/{id:guid}`**: Atualiza o nome e a UrlImage (foto) de um artista existente.
+- **`POST /api/artists`**: Adiciona um artista à memoria.
+- **`GET /api/artists/musics`**: Lista todas as músicas cadastradas na memoria com os seus respectivos artistas.
 - **`GET /api/artists/music/{musicId:guid}`**: Busca os detalhes específicos de uma única música através do seu identificador único.
 - **`POST /api/artists/{artistId:guid}/music`**: Realiza o cadastro de uma nova música ou atualiza uma existente, recebendo dados como título, letra e link do YouTube com o Id do artista ao qual ela será associada.
-- **`PUT /api/artists/music`**: Permite a atualização completa dos dados de uma música existente sem alterar os artistas associados.
+- **`PUT /api/artists/music`**: Permite a atualização completa dos dados de uma música existente para todos os artistas associados.
 - **`PATCH /api/artists/music/{id:guid}/move`**: Move uma música para outro gênero (Genre).
-- **`DELETE /api/artists/{artistId:guid}`**: Remove um artista com suas respectivas músicas permanentemente do catálogo.
+- **`DELETE /api/artists/{artistId:guid}`**: Remove um artista e suas respectivas músicas permanentemente do catálogo.
 - **`DELETE /api/artists/music/{musicId:guid}`**: Remove uma música permanentemente do catálogo.
 
 ## Tecnologias Utilizadas
