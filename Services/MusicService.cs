@@ -18,7 +18,7 @@ public class MusicService
             new()
             {
                 Id = Guid.NewGuid(),
-                Name = "Jhon Lennon",
+                Name = "John Lennon",
                 UrlImage = "https://akamai.sscdn.co/uploadfile/letras/fotos/d/4/d/1/d4d1305596424132afc895f590e39d97-tb4.jpg"
             },
             new()

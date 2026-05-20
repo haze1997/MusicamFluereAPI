@@ -44,7 +44,7 @@ O projeto é uma Minimal API feita utilizando o framework .NET 8 para expor os r
 
 3. Rode a aplicação:
    ```bash
-   dotnet run dev
+   dotnet run
    ```
    A API estará disponível por padrão em `http://localhost:80` (ou na porta configurada no seu ambiente). Você pode acessar o Swagger em `/swagger/index.html`.
 
